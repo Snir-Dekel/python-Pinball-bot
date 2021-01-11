@@ -6,7 +6,18 @@ import pydirectinput
 import pyautogui
 # mon = {'top': 0, 'left':0, 'width':1920, 'height':1080}
 import pygetwindow as gw
-my_window = gw.getWindowsWithTitle("3D Pinball for Windows - Space Cadet")[0]
+try:
+    my_window = gw.getWindowsWithTitle("3D Pinball for Windows - Space Cadet")[0]
+except:
+    try:
+        print("starting pinball")
+        subprocess.Popen(fr'"C:\Program Files (x86)\Pinball\pinball.exe"')
+        print("pinball started")
+        time.sleep(1)
+        my_window = gw.getWindowsWithTitle("3D Pinball for Windows - Space Cadet")[0]
+    except:
+        print("please install Pinball on C drive\nthe installation file is in https://github.com/TRTR5TRTR/python-Pinball-bot")
+        quit()
 my_window.activate()
 sct = mss()
 
