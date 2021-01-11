@@ -7,8 +7,9 @@ from PIL import Image
 import numpy as np
 import pydirectinput
 import pyautogui
-# mon = {'top': 0, 'left':0, 'width':1920, 'height':1080}
 import pygetwindow as gw
+# mon = {'top': 0, 'left':0, 'width':1920, 'height':1080}
+cnt = [0]
 try:
     my_window = gw.getWindowsWithTitle("3D Pinball for Windows - Space Cadet")[0]
 except:
@@ -21,6 +22,7 @@ except:
     except:
         print("please install Pinball on C drive\nthe installation file is in https://github.com/TRTR5TRTR/python-Pinball-bot")
         quit()
+
 sct = mss()
 l_contours = []
 r_contours = []
@@ -69,19 +71,55 @@ def screen_right():
         if cv2.waitKey(25) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
             break
-def click():
+# def click():
+#     while 1:
+#         start = time.time()
+#         flag = False
+#         if gw.getActiveWindowTitle() == "3D Pinball for Windows - Space Cadet":
+#             for c in l_contours:
+#             # if cv2.contourArea(c)%2==0:
+#                 pydirectinput.keyDown("z")
+#                 pyautogui.sleep(0.02)
+#                 pydirectinput.keyUp("z")
+#             # else:
+#             for c in r_contours:
+#                 pydirectinput.keyDown("/")
+#                 pyautogui.sleep(0.02)
+#                 pydirectinput.keyUp("/")
+#             if l_contours or r_contours:
+#                 flag = True
+#                 current = time.time()
+#         if flag and current - start < 0.28:
+#             time.sleep(0.5)
+def l_click():
     while 1:
+        start = time.time()
+        flag = False
         if gw.getActiveWindowTitle() == "3D Pinball for Windows - Space Cadet":
             for c in l_contours:
-            # if cv2.contourArea(c)%2==0:
                 pydirectinput.keyDown("z")
-                pyautogui.sleep(0.04)
+                pyautogui.sleep(0.02)
                 pydirectinput.keyUp("z")
-            # else:
+            if l_contours:
+                flag = True
+                current = time.time()
+        if flag and current - start < 0.28:
+            time.sleep(0.5)
+def r_click():
+    while 1:
+        start = time.time()
+        flag = False
+        if gw.getActiveWindowTitle() == "3D Pinball for Windows - Space Cadet":
             for c in r_contours:
                 pydirectinput.keyDown("/")
-                pyautogui.sleep(0.04)
+                pyautogui.sleep(0.02)
                 pydirectinput.keyUp("/")
+            if r_contours:
+                flag = True
+                current = time.time()
+        if flag and current - start < 0.255:
+            print(current-start)
+            time.sleep(0.5)
 def check_start():
     while 1:
         mon = {'top': my_window.topleft[1], 'left': my_window.topleft[0], 'width': my_window.size[0],'height': my_window.size[1]}
@@ -94,16 +132,22 @@ def check_start():
 
 t1 = threading.Thread(target=screen_left)
 t2 = threading.Thread(target=screen_right)
-t3 = threading.Thread(target=click)
+# t3 = threading.Thread(target=click)
 t4 = threading.Thread(target=check_start)
+t5 = threading.Thread(target=r_click)
+t6 = threading.Thread(target=l_click)
 
 t1.start()
 t2.start()
-t3.start()
+# t3.start()
 t4.start()
+t5.start()
+t6.start()
 time.sleep(0.2)
 my_window.activate()
 t1.join()
 t2.join()
-t3.join()
+# t3.join()
 t4.join()
+t5.join()
+t6.join()
