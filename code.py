@@ -71,26 +71,26 @@ def screen_right():
         if cv2.waitKey(25) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
             break
-# def click():
-#     while 1:
-#         start = time.time()
-#         flag = False
-#         if gw.getActiveWindowTitle() == "3D Pinball for Windows - Space Cadet":
-#             for c in l_contours:
-#             # if cv2.contourArea(c)%2==0:
-#                 pydirectinput.keyDown("z")
-#                 pyautogui.sleep(0.02)
-#                 pydirectinput.keyUp("z")
-#             # else:
-#             for c in r_contours:
-#                 pydirectinput.keyDown("/")
-#                 pyautogui.sleep(0.02)
-#                 pydirectinput.keyUp("/")
-#             if l_contours or r_contours:
-#                 flag = True
-#                 current = time.time()
-#         if flag and current - start < 0.28:
-#             time.sleep(0.5)
+def click():
+    while 1:
+        start = time.time()
+        flag = False
+        if gw.getActiveWindowTitle() == "3D Pinball for Windows - Space Cadet":
+            for c in l_contours:
+            # if cv2.contourArea(c)%2==0:
+                pydirectinput.keyDown("z")
+                pyautogui.sleep(0.02)
+                pydirectinput.keyUp("z")
+            # else:
+            for c in r_contours:
+                pydirectinput.keyDown("/")
+                pyautogui.sleep(0.02)
+                pydirectinput.keyUp("/")
+            if l_contours or r_contours:
+                flag = True
+                current = time.time()
+        if flag and current - start < 0.28:
+            time.sleep(0.5)
 def l_click():
     while 1:
         start = time.time()
