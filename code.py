@@ -118,7 +118,6 @@ def r_click():
                 flag = True
                 current = time.time()
         if flag and current - start < 0.255:
-            print(current-start)
             time.sleep(0.5)
 def check_start():
     while 1:
@@ -132,22 +131,19 @@ def check_start():
 
 t1 = threading.Thread(target=screen_left)
 t2 = threading.Thread(target=screen_right)
-# t3 = threading.Thread(target=click)
+t3 = threading.Thread(target=l_click)
 t4 = threading.Thread(target=check_start)
 t5 = threading.Thread(target=r_click)
-t6 = threading.Thread(target=l_click)
 
 t1.start()
 t2.start()
-# t3.start()
+t3.start()
 t4.start()
 t5.start()
-t6.start()
 time.sleep(0.2)
 my_window.activate()
 t1.join()
 t2.join()
-# t3.join()
+t3.join()
 t4.join()
 t5.join()
-t6.join()
