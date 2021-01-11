@@ -12,11 +12,15 @@ import pygetwindow as gw
 try:
     my_window = gw.getWindowsWithTitle("3D Pinball for Windows - Space Cadet")[0]
 except:
-    print("starting pinball")
-    subprocess.Popen(fr'"C:\Program Files (x86)\Pinball\pinball.exe"')
-    print("pinball started")
-    time.sleep(1)
-    my_window = gw.getWindowsWithTitle("3D Pinball for Windows - Space Cadet")[0]
+    try:
+        print("starting pinball")
+        subprocess.Popen(fr'"C:\Program Files (x86)\Pinball\pinball.exe"')
+        print("pinball started")
+        time.sleep(1)
+        my_window = gw.getWindowsWithTitle("3D Pinball for Windows - Space Cadet")[0]
+    except:
+        print("please install Pinball on C drive\nthe installation file is in https://github.com/TRTR5TRTR/python-Pinball-bot")
+        quit()
 
 sct = mss()
 l_contours = []
