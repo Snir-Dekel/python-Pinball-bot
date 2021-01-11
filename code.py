@@ -75,12 +75,12 @@ def click():
             for c in l_contours:
             # if cv2.contourArea(c)%2==0:
                 pydirectinput.keyDown("z")
-                pyautogui.sleep(0.02)
+                pyautogui.sleep(0.04)
                 pydirectinput.keyUp("z")
             # else:
             for c in r_contours:
                 pydirectinput.keyDown("/")
-                pyautogui.sleep(0.02)
+                pyautogui.sleep(0.04)
                 pydirectinput.keyUp("/")
 def check_start():
     while 1:
