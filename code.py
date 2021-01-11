@@ -21,7 +21,6 @@ except:
     except:
         print("please install Pinball on C drive\nthe installation file is in https://github.com/TRTR5TRTR/python-Pinball-bot")
         quit()
-my_window.activate()
 sct = mss()
 l_contours = []
 r_contours = []
@@ -102,7 +101,8 @@ t1.start()
 t2.start()
 t3.start()
 t4.start()
-
+time.sleep(0.2)
+my_window.activate()
 t1.join()
 t2.join()
 t3.join()
