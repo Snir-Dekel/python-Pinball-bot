@@ -1,0 +1,30 @@
+from mss import mss
+import cv2
+from PIL import Image
+import numpy as np
+import pydirectinput
+import pyautogui
+# mon = {'top': 0, 'left':0, 'width':1920, 'height':1080}
+import pygetwindow as gw
+my_window = gw.getWindowsWithTitle("3D Pinball for Windows - Space Cadet")[0]
+my_window.activate()
+sct = mss()
+
+while 1:
+    mon = {'top': my_window.topleft[1], 'left': my_window.topleft[0], 'width': my_window.size[0],'height': my_window.size[1]}
+    sct_img = sct.grab(mon)
+    frame = Image.frombytes('RGB', (sct_img.size.width, sct_img.size.height), sct_img.rgb)
+    frame = cv2.cvtColor(np.array(frame), cv2.COLOR_RGB2BGR)
+    sct_img1 = sct.grab(mon)
+    frame1 = Image.frombytes('RGB', (sct_img1.size.width, sct_img1.size.height), sct_img1.rgb)
+    frame1 = cv2.cvtColor(np.array(frame1), cv2.COLOR_RGB2BGR)
+    diff = cv2.absdiff(frame1, frame)
+    gray = cv2.cvtColor(diff, cv2.COLOR_RGB2GRAY)
+    _, thresh = cv2.threshold(gray, 0, 255, cv2.THRESH_BINARY)
+    dilated = cv2.dilate(thresh, None, iterations=3)
+    contours, _ = cv2.findContours(dilated, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
+    cv2.drawContours(frame1, contours, -1, (0, 255, 0), 2)
+    cv2.imshow("test2", frame1)
+    if cv2.waitKey(25) & 0xFF == ord('q'):
+        cv2.destroyAllWindows()
+        break
