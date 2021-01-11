@@ -28,7 +28,7 @@ l_contours = []
 r_contours = []
 def screen_left():
     while 1:
-        mon = {'top': my_window.topleft[1]+365, 'left': my_window.topleft[0]+130, 'width': my_window.size[0]-560,'height': my_window.size[1]-365}
+        mon = {'top': my_window.topleft[1]+395, 'left': my_window.topleft[0]+130, 'width': my_window.size[0]-560,'height': my_window.size[1]-395}
         # mon = {'top': my_window.topleft[1], 'left': my_window.topleft[0], 'width': my_window.size[0],'height': my_window.size[1]}
         sct_img = sct.grab(mon)
         frame = Image.frombytes('RGB', (sct_img.size.width, sct_img.size.height), sct_img.rgb)
@@ -51,7 +51,7 @@ def screen_left():
 
 def screen_right():
     while 1:
-        mon = {'top': my_window.topleft[1]+365, 'left': my_window.topleft[0]+195, 'width': my_window.size[0]-560,'height': my_window.size[1]-365}
+        mon = {'top': my_window.topleft[1]+395, 'left': my_window.topleft[0]+195, 'width': my_window.size[0]-560,'height': my_window.size[1]-395}
         # mon = {'top': my_window.topleft[1], 'left': my_window.topleft[0], 'width': my_window.size[0],'height': my_window.size[1]}
         sct_img = sct.grab(mon)
         frame = Image.frombytes('RGB', (sct_img.size.width, sct_img.size.height), sct_img.rgb)
@@ -71,26 +71,6 @@ def screen_right():
         if cv2.waitKey(25) & 0xFF == ord('q'):
             cv2.destroyAllWindows()
             break
-def click():
-    while 1:
-        start = time.time()
-        flag = False
-        if gw.getActiveWindowTitle() == "3D Pinball for Windows - Space Cadet":
-            for c in l_contours:
-            # if cv2.contourArea(c)%2==0:
-                pydirectinput.keyDown("z")
-                pyautogui.sleep(0.02)
-                pydirectinput.keyUp("z")
-            # else:
-            for c in r_contours:
-                pydirectinput.keyDown("/")
-                pyautogui.sleep(0.02)
-                pydirectinput.keyUp("/")
-            if l_contours or r_contours:
-                flag = True
-                current = time.time()
-        if flag and current - start < 0.28:
-            time.sleep(0.5)
 def l_click():
     while 1:
         start = time.time()
@@ -100,6 +80,7 @@ def l_click():
                 pydirectinput.keyDown("z")
                 pyautogui.sleep(0.02)
                 pydirectinput.keyUp("z")
+                time.sleep(0.1)
             if l_contours:
                 flag = True
                 current = time.time()
@@ -114,6 +95,7 @@ def r_click():
                 pydirectinput.keyDown("/")
                 pyautogui.sleep(0.02)
                 pydirectinput.keyUp("/")
+                time.sleep(0.1)
             if r_contours:
                 flag = True
                 current = time.time()
