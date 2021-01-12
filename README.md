@@ -8,7 +8,7 @@ download Pinball executable (exe file) and install the application, make sure to
 
 
 
-[the bot playing](https://media.giphy.com/media/OYpHkUmV9HPklDwQ2h/giphy.gif)
+![the bot playing](https://media.giphy.com/media/OYpHkUmV9HPklDwQ2h/giphy.gif)
 
 ![the bot playing](https://media.giphy.com/media/80QABlDkOLoXLxqFIm/giphy.gif)
 
